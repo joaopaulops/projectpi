@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\ComprovantesTable;
+use App\Model\Table\FilesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\ComprovantesTable Test Case
+ * App\Model\Table\FilesTable Test Case
  */
-class ComprovantesTableTest extends TestCase
+class FilesTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\ComprovantesTable
+     * @var \App\Model\Table\FilesTable
      */
-    public $Comprovantes;
+    public $Files;
 
     /**
      * Fixtures
@@ -24,8 +24,6 @@ class ComprovantesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.comprovantes',
-        'app.users',
         'app.files'
     ];
 
@@ -37,8 +35,8 @@ class ComprovantesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Comprovantes') ? [] : ['className' => 'App\Model\Table\ComprovantesTable'];
-        $this->Comprovantes = TableRegistry::get('Comprovantes', $config);
+        $config = TableRegistry::exists('Files') ? [] : ['className' => 'App\Model\Table\FilesTable'];
+        $this->Files = TableRegistry::get('Files', $config);
     }
 
     /**
@@ -48,7 +46,7 @@ class ComprovantesTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Comprovantes);
+        unset($this->Files);
 
         parent::tearDown();
     }
@@ -69,16 +67,6 @@ class ComprovantesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Controller\Component\UploadComponent;
 
 /**
  * Comprovantes Controller
@@ -10,7 +11,27 @@ use App\Controller\AppController;
  */
 class ComprovantesController extends AppController
 {
+    
+     public function initialize()
+    {
+         parent::initialize();     
+        $this->loadModel("Files");
+    }
 
+
+    //public function isAuthorized($user)
+//{
+    //if ($this->request->action === 'add') {
+    // return true;
+//}//
+  // if (in_array($this->request->action, ['edit', 'delete'])) {
+//$comprovanteId = (int)$this->request->params['pass'][0];
+//if ($this->Comprovnates->isOwnedBy($comprovanteId, $user['id'])) {
+//return true;
+//}
+//}
+//return parent::isAuthorized($user);
+//
     /**
      * Index method
      *
@@ -19,7 +40,7 @@ class ComprovantesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users', 'Files']
         ];
         $comprovantes = $this->paginate($this->Comprovantes);
 
@@ -37,11 +58,11 @@ class ComprovantesController extends AppController
     public function view($id = null)
     {
         $comprovante = $this->Comprovantes->get($id, [
-            'contain' => ['Users']
+            'contain' => ['Users', 'Files']
         ]);
 
         $this->set('comprovante', $comprovante);
-        $this->set('_serialize', ['comprovante']);
+        $this->recibo_idet('_serialize', ['comprovante']);
     }
 
     /**
@@ -51,19 +72,42 @@ class ComprovantesController extends AppController
      */
     public function add()
     {
+        $comprovante = '';
         $comprovante = $this->Comprovantes->newEntity();
         if ($this->request->is('post')) {
-            $comprovante = $this->Comprovantes->patchEntity($comprovante, $this->request->getData());
-            if ($this->Comprovantes->save($comprovante)) {
-                $this->Flash->success(__('The comprovante has been saved.'));
-
+            if(!empty($this->request->data['recibo_id']['name'])){
+                $fileName = $this->request->data['recibo_id']['name'];
+                $uploadPath = WWW_ROOT.'uploads/files/';
+                $uploadFile = $uploadPath.$fileName;
+                if(move_uploaded_file($this->request->data['recibo_id']['tmp_name'],$uploadFile)){
+                    $recibo_id = $this->Files->newEntity();
+                    $recibo_id->name = $fileName;
+                    $recibo_id->path = $uploadPath;
+                    $recibo_id->created = date("Y-m-d H:i:s");
+                    $recibo_id->modfied = date("Y-m-d H:i:s");
+                    $recibo_id->status=0;
+                    if ($this->Files->save($recibo_id)) {
+                        $comprovante->recibo_id = $recibo_id->id;
+                        $this->Flash->success(__('File has been uploaded and inserted successfully.'));
+                    }else{
+                        $this->Flash->error(__('Unable to upload file, please try again.'));
+                    }
+                }else{
+                    $this->Flash->error(__('Please choose a file to upload.'));
+                }
+            
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The comprovante could not be saved. Please, try again.'));
-        }
+            
+            $comprovante = $this->Comprovantes->patchEntity($comprovante, $this->request->getData());
+            
+            }
+
         $users = $this->Comprovantes->Users->find('list', ['limit' => 200]);
-        $this->set(compact('comprovante', 'users'));
+        $files = $this->Comprovantes->Files->find('list', ['limit' => 200]);
+        $this->set(compact('comprovante', 'users', 'files'));
         $this->set('_serialize', ['comprovante']);
+         
     }
 
     /**
@@ -88,7 +132,8 @@ class ComprovantesController extends AppController
             $this->Flash->error(__('The comprovante could not be saved. Please, try again.'));
         }
         $users = $this->Comprovantes->Users->find('list', ['limit' => 200]);
-        $this->set(compact('comprovante', 'users'));
+        $files = $this->Comprovantes->Files->find('list', ['limit' => 200]);
+        $this->set(compact('comprovante', 'users', 'files'));
         $this->set('_serialize', ['comprovante']);
     }
 

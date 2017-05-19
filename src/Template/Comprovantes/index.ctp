@@ -9,6 +9,8 @@
         <li><?= $this->Html->link(__('New Comprovante'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="comprovantes index large-9 medium-8 columns content">
@@ -18,7 +20,8 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                <!--<th scope="col"><?= $this->Paginator->sort('boleto_id') ?></th>-->
+                <th scope="col"><?= $this->Paginator->sort('recibo_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('payment') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Maturity') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('aproved') ?></th>
@@ -30,7 +33,8 @@
             <tr>
                 <td><?= $this->Number->format($comprovante->id) ?></td>
                 <td><?= $comprovante->has('user') ? $this->Html->link($comprovante->user->id, ['controller' => 'Users', 'action' => 'view', $comprovante->user->id]) : '' ?></td>
-                <td><?= h($comprovante->created) ?></td>
+                <!--<td><?= $this->Number->format($comprovante->boleto_id) ?></td>-->
+                <td><?= $comprovante->has('file') ? $this->Html->link($comprovante->file->name, ['controller' => 'Files', 'action' => 'view', $comprovante->file->id]) : '' ?></td>
                 <td><?= h($comprovante->payment) ?></td>
                 <td><?= h($comprovante->Maturity) ?></td>
                 <td><?= h($comprovante->aproved) ?></td>

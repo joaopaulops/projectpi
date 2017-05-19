@@ -1,13 +1,13 @@
 <?php
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\ComprovantesController;
+use App\Controller\FilesController;
 use Cake\TestSuite\IntegrationTestCase;
 
 /**
- * App\Controller\ComprovantesController Test Case
+ * App\Controller\FilesController Test Case
  */
-class ComprovantesControllerTest extends IntegrationTestCase
+class FilesControllerTest extends IntegrationTestCase
 {
 
     /**
@@ -16,8 +16,6 @@ class ComprovantesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.comprovantes',
-        'app.users',
         'app.files'
     ];
 
