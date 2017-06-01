@@ -72,8 +72,10 @@ class ComprovantesController extends AppController
      */
     public function add()
     {
-        $comprovante = '';
+       
         $comprovante = $this->Comprovantes->newEntity();
+        $comprovante = $this->Comprovantes->patchEntity($comprovante, $this->request->getData());
+
         if ($this->request->is('post')) {
             if(!empty($this->request->data['recibo_id']['name'])){
                 $fileName = $this->request->data['recibo_id']['name'];
@@ -88,6 +90,7 @@ class ComprovantesController extends AppController
                     $recibo_id->status=0;
                     if ($this->Files->save($recibo_id)) {
                         $comprovante->recibo_id = $recibo_id->id;
+
                         $this->Flash->success(__('File has been uploaded and inserted successfully.'));
                     }else{
                         $this->Flash->error(__('Unable to upload file, please try again.'));
@@ -95,17 +98,19 @@ class ComprovantesController extends AppController
                 }else{
                     $this->Flash->error(__('Please choose a file to upload.'));
                 }
-            
-                return $this->redirect(['action' => 'index']);
-            }
-            
-            $comprovante = $this->Comprovantes->patchEntity($comprovante, $this->request->getData());
+                       
             
             }
 
+        if ($this->Comprovantes->save($comprovante)) {
+                $this->Flash->success(__('The comprovante has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The comprovante could not be saved. Please, try again.'));
+        }
+        $comprovante->user_id = $this->Auth->user('id');
         $users = $this->Comprovantes->Users->find('list', ['limit' => 200]);
-        $files = $this->Comprovantes->Files->find('list', ['limit' => 200]);
-        $this->set(compact('comprovante', 'users', 'files'));
+        $this->set(compact('comprovante', 'users'));
         $this->set('_serialize', ['comprovante']);
          
     }

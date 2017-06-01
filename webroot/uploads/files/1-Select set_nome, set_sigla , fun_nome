@@ -1,0 +1,21 @@
+1-Select set_nome, set_sigla , fun_nome
+
+From SCP_setores,
+     SCP_funcionarios
+
+order by set_nome;
+
+2- Select pro_codigo, pro_tipo, pro_nome , pro_qtdd ,pro_preço_venda
+
+   From SCP_produtos
+
+   Where valor total = (pro_qtdd  *  pro_preço_venda)
+
+
+3- Select pro_tipo, ite_quantidade, sum (pro_codigo)
+
+   From SCP_produtos
+        SCP_itens
+
+ordey by 
+   

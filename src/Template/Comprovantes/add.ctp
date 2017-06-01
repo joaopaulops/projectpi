@@ -19,7 +19,7 @@
     <fieldset>
         <legend><?= __('Add Comprovante') ?></legend>
         <?php
-            //echo $this->Form->control('user_id');
+            echo $this->Form->control('user_id');
             //echo $this->Form->control('boleto_id', ['type' => 'file', 'class' => 'form-control']);
             echo $this->Form->control('recibo_id', ['type' => 'file', 'class' => 'form-control']);
             echo $this->Form->control('payment');

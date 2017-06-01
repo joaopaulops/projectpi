@@ -24,7 +24,7 @@
     <fieldset>
         <legend><?= __('Edit Comprovante') ?></legend>
         <?php
-            //echo $this->Form->control('user_id');
+            echo $this->Form->control('user_id');
             //echo $this->Form->control('boleto_id', ['options' => $files]);
             echo $this->Form->control('recibo_id', ['type' => 'file', 'class' => 'form-control']);
             echo $this->Form->control('payment');

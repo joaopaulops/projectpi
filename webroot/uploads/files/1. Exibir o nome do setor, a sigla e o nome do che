@@ -1,0 +1,31 @@
+1. Exibir o nome do setor, a sigla e o nome do chefe de cada setor da empresa, ordenados pelo nome do
+setor.
+2. Exibir, para cada produto, o código e o nome do tipo, o nome do produto, a quantidade em estoque, o
+preço de venda e o valor total de cada produto (quantidade em estoque * preço de venda).
+3. Exibir o nome do tipo com a quantidade e o valor total dos produtos para cada tipo.
+4. Exibir a quantidade de clientes existente em cada cidade que a empresa atende, exibindo o nome da
+cidade e ordenando pelo nome da cidade.
+5. Exibir por função e por sexo quantos funcionários não possuem e-mail, exibindo também o nome da
+função e ordenando pela função.
+6. Exibir o nome do produto, o nome do tipo, o preço médio de custo e o preço médio de venda e a
+diferença entre esses preços para cada produto existente na empresa, ordenados pelo nome do produto.
+7. Exibir o nome, a sigla e o total de salários por sexo de cada setor da empresa, ordenados pelo nome do
+setor.
+8. Exibir o nome de cada função, a quantidade de homens e mulheres e o total de salários por sexo, para
+as funções onde o total de salários de cada sexo seja maior do que R$ 1.000,00, ordenados pelo nome da
+função.
+9. Exibir a lista dos pedidos com o nome do cliente e do vendedor e o valor total de cada pedido,
+ordenados pelo código do pedido.
+10. Exibir, para cada funcionário que tenha nascido fora do Brasil, o nome, o sexo, o salário e o nome da
+cidade onde nasceu.
+11. Exibir a quantidade de funcionários, o total e a média de salários dos funcionários de cada cidade,
+exibindo também o nome da cidade e do país.
+12. Exibir o nome do funcionário, o nome da cidade onde ele nasceu e o nome da cidade onde ele reside,
+ordenados pelo nome do funcionário.
+13. Exibir o código do pedido, a via de transporte, o nome do cliente e o nome do vendedor dos pedidos
+remetidos por via aérea, ordenados pelo código do pedido.
+14. Exibir o nome de todos os tipos de produto cadastrados na empresa e o nome dos produtos de cada
+tipo, mesmo que exista tipo cadastrado que ainda não possua nenhum produto, ordenando pelo nome do
+tipo.
+15. Exibir o nome da função e o nome do funcionário que exerce cada uma delas, mesmo que exista
+função que não possua nenhum funcionário, ordenando pelo nome da função e nome do funcionário.
