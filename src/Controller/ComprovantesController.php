@@ -62,7 +62,7 @@ class ComprovantesController extends AppController
         ]);
 
         $this->set('comprovante', $comprovante);
-        $this->recibo_idet('_serialize', ['comprovante']);
+        $this->set('_serialize', ['comprovante']);
     }
 
     /**
@@ -91,7 +91,7 @@ class ComprovantesController extends AppController
                     if ($this->Files->save($recibo_id)) {
                         $comprovante->recibo_id = $recibo_id->id;
 
-                        $this->Flash->success(__('File has been uploaded and inserted successfully.'));
+                        //$this->Flash->success(__('File has been uploaded and inserted successfully.'));
                     }else{
                         $this->Flash->error(__('Unable to upload file, please try again.'));
                     }

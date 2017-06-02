@@ -89,7 +89,7 @@ class ComprovantesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['boleto_id'], 'Files'));
+        //$rules->add($rules->existsIn(['boleto_id'], 'Files'));
         $rules->add($rules->existsIn(['recibo_id'], 'Files'));
 
         return $rules;
