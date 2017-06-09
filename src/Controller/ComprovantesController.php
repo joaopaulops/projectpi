@@ -1,8 +1,11 @@
 <?php
 namespace App\Controller;
 
+
 use App\Controller\AppController;
 use App\Controller\Component\UploadComponent;
+use cake\Controller\Files;
+use Cake\Mailer\Email;
 
 /**
  * Comprovantes Controller
@@ -101,17 +104,32 @@ class ComprovantesController extends AppController
                        
             
             }
-
+            $comprovante->user_id = $this->Auth->user('id');
         if ($this->Comprovantes->save($comprovante)) {
                 $this->Flash->success(__('The comprovante has been saved.'));
+
+          $email = new Email('default');
+          $email->from(['skpaulosilva026@gmail.com' => 'EnTec 2017'])
+          ->emailFormat('html')
+          ->to('joaoperreira026@gmail.com')
+          ->template('default','template')
+          ->subject('[WEB II] Exemplo de email')
+          ->viewVars(['nome' => $this->Auth->user('nome'),'id_usuario' => $this->Auth->user('id')])
+          ->send('Bla', 'Bla');
+
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The comprovante could not be saved. Please, try again.'));
         }
-        $comprovante->user_id = $this->Auth->user('id');
+        
         $users = $this->Comprovantes->Users->find('list', ['limit' => 200]);
-        $this->set(compact('comprovante', 'users'));
+        $this->set(compact('comprovante', 'users', 'files'));
         $this->set('_serialize', ['comprovante']);
+
+
+
+       
          
     }
 
